@@ -17,10 +17,11 @@ public class Statement {
     private String label;
     private String seqBody;
 
-    private ArrayList<Statement> ifBody;
-    private ArrayList<Statement> elseBody;
-    private ArrayList<Statement> whileBody;
-    private ArrayList<Variable> vars;
+    private ArrayList<Statement> ifBody = new ArrayList<>();
+    private ArrayList<Statement> elseBody = new ArrayList<>();
+    private ArrayList<Statement> whileBody = new ArrayList<>();
+    private ArrayList<Variable> vars = new ArrayList<>();
+
 
     boolean isNull() {
         return condition.isEmpty() && seqBody.isEmpty();

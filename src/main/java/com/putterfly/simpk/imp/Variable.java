@@ -9,12 +9,6 @@ public class Variable {
     private final VariableType type;
     private int value;
 
-    public Variable(String name, VariableType type, int value) {
-        this.name = name;
-        this.type = type;
-        this.value = value;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
