@@ -24,16 +24,6 @@ public class FirstOrderLogic {
         return preLabel.isEmpty() && postLabel.isEmpty();
     }
 
-    public static FirstOrderLogic toFormula(Statement pre, Statement post) {
-        FirstOrderLogic logic = new FirstOrderLogic();
-        logic.setPreLabel(pre.getLabel());
-        logic.setPostLabel(post.getLabel());
-        logic.setCondition(pre.getCondition());
-        logic.setOpr(pre.getSeqBody());
-        logic.setVars(pre.getVars());
-        return logic;
-    }
-
     public String findAssignVariable(String statement) {
         Pattern r = Pattern.compile("(\\w+)\\s*=\\s*");
         Matcher m = r.matcher(statement);
@@ -54,7 +44,7 @@ public class FirstOrderLogic {
             if (var.isEmpty()) {
                 tmp += " and SAME(V)";
             } else {
-                tmp += String.format(" and SAME(V\\{%s}", var);
+                tmp += String.format(" and SAME(V\\{%s})", var);
             }
             return tmp;
         }
@@ -173,5 +163,60 @@ public class FirstOrderLogic {
             }
         }
         return 0;
+    }
+
+    static FirstOrderLogic toFormula(Statement pre, Statement post) {
+        FirstOrderLogic logic = new FirstOrderLogic();
+        logic.setPreLabel(pre.getLabel());
+        logic.setPostLabel(post.getLabel());
+        logic.setCondition(pre.getCondition());
+        logic.setOpr(pre.getSeqBody());
+        logic.setVars(pre.getVars());
+        return logic;
+    }
+
+    public static ArrayList<FirstOrderLogic> toFormula(ArrayList<Statement> sms, Statement out) {
+        if (sms.isEmpty()) {
+            return new ArrayList<>();
+        }
+        if (out.getLabel().isEmpty()) {
+            String prefix = sms.get(0).getLabel().substring(0, 1);
+            out.setLabel(prefix + "E");
+        }
+
+        ArrayList<FirstOrderLogic> list = new ArrayList<>();
+        for (int i = 0; i < sms.size(); i++) {
+            Statement postSm = out;
+            Statement sm = sms.get(i);
+            if (i + 1 < sms.size()) {
+                postSm = sms.get(i + 1);
+            }
+            if (sm.getType() == StatementType.If) {
+                 if (!sm.getIfBody().isEmpty()) {
+                     list.add(toFormula(sm, sm.getIfBody().get(0)));
+                     list.addAll(toFormula(sm.getIfBody(), postSm));
+                 }
+                 if (!sm.getElseBody().isEmpty()) {
+                     sm.reverseCondition();
+                     list.add(toFormula(sm, sm.getElseBody().get(0)));
+                     list.addAll(toFormula(sm.getElseBody(), postSm));
+                 }
+            } else if (sm.getType() == StatementType.While) {
+                if (!sm.getWhileBody().isEmpty()) {
+                    list.add(toFormula(sm, sm.getWhileBody().get(0)));
+                    list.addAll(toFormula(sm.getWhileBody(), sm));
+                }
+                sm.reverseCondition();
+                list.add(toFormula(sm, postSm));
+            } else if (sm.getType() == StatementType.Wait) {
+                sm.reverseCondition();
+                list.add(toFormula(sm, sm));
+                sm.reverseCondition();
+                list.add(toFormula(sm, postSm));
+            } else {
+                list.add(toFormula(sm, postSm));
+            }
+        }
+        return list;
     }
 }

@@ -71,5 +71,23 @@ public class Imp {
             }
         }
 
+        ArrayList<ArrayList<FirstOrderLogic>> logicss = new ArrayList<>();
+        System.out.println("First order logic formula:");
+        boolean hasPc = smss.size() > 1;
+        for (int i = 0; i < smss.size(); i++) {
+            ArrayList<FirstOrderLogic> logics = FirstOrderLogic.toFormula(smss.get(i), new Statement());
+            logicss.add(logics);
+            for (FirstOrderLogic v : logics) {
+                if (hasPc) {
+                    String pc = String.format("pc%d", i);
+                    String logicNew = v.toString();
+                    logicNew = logicNew.replace("pc", pc);
+                    System.out.printf("pc=%s and %s%n", pc, logicNew);
+                } else {
+                    System.out.println(v.toString());
+                }
+            }
+        }
+
     }
 }

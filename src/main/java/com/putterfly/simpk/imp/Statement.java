@@ -13,9 +13,9 @@ import java.util.ArrayList;
 @Data
 public class Statement {
     private StatementType type;
-    private String condition;
-    private String label;
-    private String seqBody;
+    private String condition = "";
+    private String label = "";
+    private String seqBody = "";
 
     private ArrayList<Statement> ifBody = new ArrayList<>();
     private ArrayList<Statement> elseBody = new ArrayList<>();
