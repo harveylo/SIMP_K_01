@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @date 2021/10/20 16:06
  */
 @Data
-public class FirstOrderLogical {
+public class FirstOrderLogic {
     private String preLabel;
     private String postLabel;
     private String condition;
@@ -22,6 +22,16 @@ public class FirstOrderLogical {
 
     public boolean isNull() {
         return preLabel.isEmpty() && postLabel.isEmpty();
+    }
+
+    public static FirstOrderLogic toFormula(Statement pre, Statement post) {
+        FirstOrderLogic logic = new FirstOrderLogic();
+        logic.setPreLabel(pre.getLabel());
+        logic.setPostLabel(post.getLabel());
+        logic.setCondition(pre.getCondition());
+        logic.setOpr(pre.getSeqBody());
+        logic.setVars(pre.getVars());
+        return logic;
     }
 
     public String findAssignVariable(String statement) {
