@@ -33,7 +33,7 @@ public class Imp {
 //        }
 //        log.info(Integer.valueOf(String.valueOf('1')).toString());
 
-        String s = "x=0;\ny=2;\nif x < y then \n while x < 2 do \n x = x + 1; endwhile; else\n y = y + 1; \n endif;";
+        String s = "cobegin while true do wait(r==0); r = 1; endwhile; || while true do wait(r == 1); r = 0; endwhile; coend;";
 //        log.info(String.valueOf(s.indexOf("c")));
 //        String processTmp = "abc || fdjasoifdj \n dasofdi";
 //        ArrayList<String> processes = new ArrayList<>(Arrays.asList(processTmp.split("\\|\\|")));

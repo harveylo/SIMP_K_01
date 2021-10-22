@@ -30,7 +30,7 @@ public class Parser {
         return processes;
     }
 
-    public static boolean parseStatements(String input, ArrayList<Statement> statements) {
+    public static void parseStatements(String input, ArrayList<Statement> statements) {
         int s = 0;
         int e = 0;
         while (s < input.length()) {
@@ -64,7 +64,6 @@ public class Parser {
                 s = e;
             }
         }
-        return true;
     }
 
     static Statement parseWait(String input) {
@@ -72,6 +71,7 @@ public class Parser {
         String condition;
         Pattern r = Pattern.compile("wait\\((.+)\\)");
         Matcher m = r.matcher(input);
+        if (!m.find()) throw new AssertionError();
         condition = m.group(1).trim();
 
         sm.setType(StatementType.Wait);

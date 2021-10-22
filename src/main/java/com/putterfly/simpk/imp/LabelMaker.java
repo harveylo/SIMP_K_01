@@ -43,19 +43,20 @@ public class LabelMaker {
         }
     }
 
-    public static void labelStatements(Character prefix, int index, ArrayList<Statement> sms) {
+    public static int labelStatements(Character prefix, int index, ArrayList<Statement> sms) {
         if (sms.isEmpty()) {
-            return;
+            return index;
         }
         for (Statement v : sms) {
             v.setLabel(String.format("%s%d", prefix, index++));
             if (v.getType() == StatementType.If) {
-                labelStatements(prefix, index, v.getIfBody());
-                labelStatements(prefix, index, v.getElseBody());
+                index = labelStatements(prefix, index, v.getIfBody());
+                index = labelStatements(prefix, index, v.getElseBody());
             } else if (v.getType() == StatementType.While) {
-                labelStatements(prefix, index, v.getWhileBody());
+                index = labelStatements(prefix, index, v.getWhileBody());
             }
         }
+        return index;
     }
 
 }
