@@ -1,5 +1,6 @@
 package com.putterfly.simpk.imp;
 
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -18,13 +19,57 @@ public class Imp {
     public static int modValue = 3;
 
 
+    public static ArrayList<ArrayList<Statement>> parseImp(String input) {
+        ArrayList<String> processes = Parser.parseCoProcess(input);
+        ArrayList<ArrayList<Statement>> smss = new ArrayList<>();
+        for (String v : processes) {
+            ArrayList<Statement> tmp = new ArrayList<>();
+            Parser.parseStatements(v, tmp);
+            smss.add(tmp);
+        }
+        return smss;
+    }
+
+    public static String makeLabel(ArrayList<ArrayList<Statement>> smss) {
+        LabelMaker.labelStatements(smss);
+
+        StringBuilder labeledImp = new StringBuilder();
+        for (ArrayList<Statement> v : smss) {
+            ArrayList<String> list = new ArrayList<>();
+            LabelMaker.statementToList(v, list, "");
+            String prefix = list.get(0).substring(0, 1);
+            list.add(prefix + "E:");
+            for (String ls : list) {
+                labeledImp.append(ls).append("\n");
+            }
+        }
+
+        return labeledImp.toString();
+    }
+
+    public static Pair<String, ArrayList<ArrayList<FirstOrderLogic>>> makeFirstOrderLogic(ArrayList<ArrayList<Statement>> smss) {
+        ArrayList<ArrayList<FirstOrderLogic>> logicss = new ArrayList<>();
+        StringBuilder logicString = new StringBuilder();
+        boolean hasPc = smss.size() > 1;
+        for (int i = 0; i < smss.size(); i++) {
+            ArrayList<FirstOrderLogic> logics = FirstOrderLogic.toFormula(smss.get(i), new Statement());
+            logicss.add(logics);
+            for (FirstOrderLogic v : logics) {
+                if (hasPc) {
+                    String pc = String.format("pc%d", i);
+                    String logicNew = v.toString();
+                    logicNew = logicNew.replace("pc", pc);
+                    logicString.append(String.format("pc=%s and %s%n", pc, logicNew));
+                } else {
+                    logicString.append(v.toString());
+                }
+            }
+        }
+        return new Pair<>(logicString.toString(), logicss);
+    }
+
 
     public static void main(String[] args) {
-        String line = "cobegin jsdia safjdioa \n safdjsaoo josidfja coend";
-        String pattern = "cobegin([\\S\\s]+)coend";
-
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(line);
 
 //        if (m.find()) {
 //            log.info(m.group(1));
@@ -50,44 +95,44 @@ public class Imp {
 //        c = Character.valueOf((char) (c + 1));
 //        System.out.println(c);
 
-        ArrayList<String> processes = Parser.parseCoProcess(s);
-        ArrayList<ArrayList<Statement>> smss = new ArrayList<>();
-        for (String v : processes) {
-            ArrayList<Statement> tmp = new ArrayList<>();
-            Parser.parseStatements(v, tmp);
-            smss.add(tmp);
-        }
+//        ArrayList<String> processes = Parser.parseCoProcess(s);
+//        ArrayList<ArrayList<Statement>> smss = new ArrayList<>();
+//        for (String v : processes) {
+//            ArrayList<Statement> tmp = new ArrayList<>();
+//            Parser.parseStatements(v, tmp);
+//            smss.add(tmp);
+//        }
 
-        LabelMaker.labelStatements(smss);
+//        LabelMaker.labelStatements(smss);
+//
+//        System.out.println("Labeled function:");
+//        for (ArrayList<Statement> v : smss) {
+//            ArrayList<String> list = new ArrayList<>();
+//            LabelMaker.statementToList(v, list, "");
+//            String prefix = list.get(0).substring(0, 1);
+//            list.add(prefix + "E:");
+//            for (String ls : list) {
+//                System.out.println(ls);
+//            }
+//        }
 
-        System.out.println("Labeled function:");
-        for (ArrayList<Statement> v : smss) {
-            ArrayList<String> list = new ArrayList<>();
-            LabelMaker.statementToList(v, list, "");
-            String prefix = list.get(0).substring(0, 1);
-            list.add(prefix + "E:");
-            for (String ls : list) {
-                System.out.println(ls);
-            }
-        }
-
-        ArrayList<ArrayList<FirstOrderLogic>> logicss = new ArrayList<>();
-        System.out.println("First order logic formula:");
-        boolean hasPc = smss.size() > 1;
-        for (int i = 0; i < smss.size(); i++) {
-            ArrayList<FirstOrderLogic> logics = FirstOrderLogic.toFormula(smss.get(i), new Statement());
-            logicss.add(logics);
-            for (FirstOrderLogic v : logics) {
-                if (hasPc) {
-                    String pc = String.format("pc%d", i);
-                    String logicNew = v.toString();
-                    logicNew = logicNew.replace("pc", pc);
-                    System.out.printf("pc=%s and %s%n", pc, logicNew);
-                } else {
-                    System.out.println(v.toString());
-                }
-            }
-        }
+//        ArrayList<ArrayList<FirstOrderLogic>> logicss = new ArrayList<>();
+//        System.out.println("First order logic formula:");
+//        boolean hasPc = smss.size() > 1;
+//        for (int i = 0; i < smss.size(); i++) {
+//            ArrayList<FirstOrderLogic> logics = FirstOrderLogic.toFormula(smss.get(i), new Statement());
+//            logicss.add(logics);
+//            for (FirstOrderLogic v : logics) {
+//                if (hasPc) {
+//                    String pc = String.format("pc%d", i);
+//                    String logicNew = v.toString();
+//                    logicNew = logicNew.replace("pc", pc);
+//                    System.out.printf("pc=%s and %s%n", pc, logicNew);
+//                } else {
+//                    System.out.println(v.toString());
+//                }
+//            }
+//        }
 
     }
 }
