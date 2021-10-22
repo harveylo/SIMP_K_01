@@ -70,69 +70,11 @@ public class Imp {
 
 
     public static void main(String[] args) {
-
-//        if (m.find()) {
-//            log.info(m.group(1));
-//        } else {
-//            log.info("abcccccccccccc");
-//        }
-//        log.info(Integer.valueOf(String.valueOf('1')).toString());
-
         String s = "cobegin while true do wait(r==0); r = 1; endwhile; || while true do wait(r == 1); r = 0; endwhile; coend;";
-//        log.info(String.valueOf(s.indexOf("c")));
-//        String processTmp = "abc || fdjasoifdj \n dasofdi";
-//        ArrayList<String> processes = new ArrayList<>(Arrays.asList(processTmp.split("\\|\\|")));
-//        for (int i = 0; i < processes.size(); i++) {
-//            processes.set(i, processes.get(i).trim());
-//        }
-//        for (String ss : processes) {
-//            System.out.println(ss);
-//            System.out.println("end");
-//        }
-//        System.out.println(s.substring(1, 7));
 
-//        Character c = 'e';
-//        c = Character.valueOf((char) (c + 1));
-//        System.out.println(c);
-
-//        ArrayList<String> processes = Parser.parseCoProcess(s);
-//        ArrayList<ArrayList<Statement>> smss = new ArrayList<>();
-//        for (String v : processes) {
-//            ArrayList<Statement> tmp = new ArrayList<>();
-//            Parser.parseStatements(v, tmp);
-//            smss.add(tmp);
-//        }
-
-//        LabelMaker.labelStatements(smss);
-//
-//        System.out.println("Labeled function:");
-//        for (ArrayList<Statement> v : smss) {
-//            ArrayList<String> list = new ArrayList<>();
-//            LabelMaker.statementToList(v, list, "");
-//            String prefix = list.get(0).substring(0, 1);
-//            list.add(prefix + "E:");
-//            for (String ls : list) {
-//                System.out.println(ls);
-//            }
-//        }
-
-//        ArrayList<ArrayList<FirstOrderLogic>> logicss = new ArrayList<>();
-//        System.out.println("First order logic formula:");
-//        boolean hasPc = smss.size() > 1;
-//        for (int i = 0; i < smss.size(); i++) {
-//            ArrayList<FirstOrderLogic> logics = FirstOrderLogic.toFormula(smss.get(i), new Statement());
-//            logicss.add(logics);
-//            for (FirstOrderLogic v : logics) {
-//                if (hasPc) {
-//                    String pc = String.format("pc%d", i);
-//                    String logicNew = v.toString();
-//                    logicNew = logicNew.replace("pc", pc);
-//                    System.out.printf("pc=%s and %s%n", pc, logicNew);
-//                } else {
-//                    System.out.println(v.toString());
-//                }
-//            }
-//        }
+        ArrayList<ArrayList<Statement>> imp = parseImp(s);
+        System.out.println(makeLabel(imp));
+        System.out.println(makeFirstOrderLogic(imp).getKey());
 
     }
 }
