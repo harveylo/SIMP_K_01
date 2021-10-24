@@ -1,14 +1,19 @@
 package com.putterfly.simpk.app.item;
 
 
+import com.putterfly.simpk.imp.FirstOrderLogic;
+import com.putterfly.simpk.imp.Imp;
+import com.putterfly.simpk.imp.Statement;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.util.List;
 
 @Slf4j(topic = "")
 public class TopMenu extends MenuBar {
@@ -17,9 +22,9 @@ public class TopMenu extends MenuBar {
     private FileChooser fileChooser;
     private Stage stage;
     private TextArea textArea;
-    private Label label;
+    private TextArea label;
 
-    public TopMenu(Stage stage, TextArea textArea,Label label){
+    public TopMenu(Stage stage, TextArea textArea,TextArea label){
         super();
         fileMenu = new Menu("File");
         startMenu = new Menu("Start");
@@ -31,13 +36,26 @@ public class TopMenu extends MenuBar {
         this.textArea = textArea;
         MenuItem openFile = new MenuItem("Open");
         openFile.setOnAction((ActionEvent e)->{openFile();});
-        MenuItem saveFile = new MenuItem("Save");
+        MenuItem saveFile = new MenuItem("SaveText");
         saveFile.setOnAction((ActionEvent e)->{saveFile();});
+        MenuItem startText = new MenuItem("TransText");
+        startText.setOnAction((ActionEvent e)->{toText();});
         fileMenu.getItems().add(openFile);
         fileMenu.getItems().add(saveFile);
+        startMenu.getItems().add(startText);
 //        log.info("initialized complete");
     }
 
+    private void toText(){
+        List<List<Statement>> sts = Imp.parseImp(textArea.getText());
+        String labelled = Imp.makeLabel(sts);
+        Pair<String,List<List<FirstOrderLogic>>> firstOrder = Imp.makeFirstOrderLogic(sts);
+        StringBuilder sb = new StringBuilder();
+        sb.append("The labelled program is:").append('\n').append('\n').append(labelled)
+                .append('\n').append('\n').append("The first order logic is:").append('\n').append('\n')
+                .append(firstOrder.getKey());
+        label.setText(sb.toString());
+    }
     private void saveFile(){
         String s = label.getText();
         fileChooser.setTitle("Save to");

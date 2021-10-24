@@ -4,6 +4,8 @@ package com.putterfly.simpk.imp;
 import javafx.util.Pair;
 import lombok.Data;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -175,16 +177,16 @@ public class FirstOrderLogic {
         return logic;
     }
 
-    public static ArrayList<FirstOrderLogic> toFormula(ArrayList<Statement> sms, Statement out) {
+    public static List<FirstOrderLogic> toFormula(List<Statement> sms, Statement out) {
         if (sms.isEmpty()) {
-            return new ArrayList<>();
+            return new LinkedList<>();
         }
         if (out.getLabel().isEmpty()) {
             String prefix = sms.get(0).getLabel().substring(0, 1);
             out.setLabel(prefix + "E");
         }
 
-        ArrayList<FirstOrderLogic> list = new ArrayList<>();
+        List<FirstOrderLogic> list = new LinkedList<>();
         for (int i = 0; i < sms.size(); i++) {
             Statement postSm = out;
             Statement sm = sms.get(i);

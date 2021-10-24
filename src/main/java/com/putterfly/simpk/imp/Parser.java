@@ -3,6 +3,7 @@ package com.putterfly.simpk.imp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,8 +13,8 @@ import java.util.regex.Pattern;
  * @date 2021/10/21 1:11
  */
 public class Parser {
-    public static ArrayList<String> parseCoProcess(String text) {
-        ArrayList<String> processes;
+    public static List<String> parseCoProcess(String text) {
+        List<String> processes;
         Pattern r = Pattern.compile("cobegin([\\s\\S]+)coend");
         Matcher m = r.matcher(text);
         if (m.find()) {
@@ -30,7 +31,7 @@ public class Parser {
         return processes;
     }
 
-    public static void parseStatements(String input, ArrayList<Statement> statements) {
+    public static void parseStatements(String input, List<Statement> statements) {
         int s = 0;
         int e = 0;
         while (s < input.length()) {

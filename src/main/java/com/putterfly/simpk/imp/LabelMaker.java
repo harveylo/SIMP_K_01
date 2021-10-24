@@ -1,6 +1,7 @@
 package com.putterfly.simpk.imp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author YueChen
@@ -9,16 +10,16 @@ import java.util.ArrayList;
  */
 public class LabelMaker {
 
-    public static void labelStatements(ArrayList<ArrayList<Statement>> smss) {
+    public static void labelStatements(List<List<Statement>> smss) {
         Character prefix = 'A';
-        for (ArrayList<Statement> sms : smss) {
+        for (List<Statement> sms : smss) {
             int index = 0;
             labelStatements(prefix, index, sms);
             prefix = Character.valueOf((char) (prefix + 1));
         }
     }
 
-    public static void statementToList(ArrayList<Statement> sms, ArrayList<String> list, String space) {
+    public static void statementToList(List<Statement> sms, List<String> list, String space) {
         if (sms.isEmpty()) {
             return;
         }
@@ -43,7 +44,7 @@ public class LabelMaker {
         }
     }
 
-    public static int labelStatements(Character prefix, int index, ArrayList<Statement> sms) {
+    public static int labelStatements(Character prefix, int index, List<Statement> sms) {
         if (sms.isEmpty()) {
             return index;
         }
