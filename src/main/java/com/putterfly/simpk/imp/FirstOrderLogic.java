@@ -148,6 +148,7 @@ public class FirstOrderLogic {
 
         Pattern r = Pattern.compile("(\\w)\\s*([><=andotr]+)\\s*(\\w)");
         Matcher m = r.matcher(conditionNew);
+        if (!m.find()) throw new AssertionError();
 
         Character varLeft = m.group(1).charAt(0);
         String op = m.group(2);
