@@ -13,13 +13,11 @@ public class KripkeStructure {
     String lastLabel;
     List<Variable> firstVars;
     List<Variable> lastVars;
-//    String operator;
+    String operator;
 
     @Override
     public String toString(){
-        if (
-//                operator.equals("")&&
-                firstLabel.isEmpty()&&lastLabel.isEmpty())
+        if (operator.equals("")&&firstLabel.isEmpty()&&lastLabel.isEmpty())
             return "";
         List<String> unidVars = new LinkedList<>();
         for(Variable s : lastVars){

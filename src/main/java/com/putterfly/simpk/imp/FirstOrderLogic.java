@@ -20,10 +20,25 @@ public class FirstOrderLogic {
     private String postLabel;
     private String condition;
     private String opr;
-    private ArrayList<Variable> vars;
+    private List<Variable> vars;
 
     public boolean isNull() {
-        return preLabel.isEmpty() && postLabel.isEmpty();
+        return (preLabel==null&&postLabel==null)||preLabel.isEmpty() && postLabel.isEmpty();
+    }
+
+    public FirstOrderLogic(){
+        preLabel = "";
+        postLabel = "";
+        condition = "";
+        opr = "";
+        vars = new LinkedList<>();
+    }
+    public FirstOrderLogic(FirstOrderLogic f){
+        preLabel = f.getPreLabel();
+        postLabel = f.getPostLabel();
+        condition = f.getCondition();
+        opr = f.getOpr();
+        vars = f.getVars();
     }
 
     public String findAssignVariable(String statement) {

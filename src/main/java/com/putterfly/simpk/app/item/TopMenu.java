@@ -4,6 +4,8 @@ package com.putterfly.simpk.app.item;
 import com.putterfly.simpk.imp.FirstOrderLogic;
 import com.putterfly.simpk.imp.Imp;
 import com.putterfly.simpk.imp.Statement;
+import com.putterfly.simpk.ks.KripkeStructure;
+import com.putterfly.simpk.ks.KripkeTransfer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -53,7 +55,9 @@ public class TopMenu extends MenuBar {
         StringBuilder sb = new StringBuilder();
         sb.append("The labelled program is:").append('\n').append('\n').append(labelled)
                 .append('\n').append('\n').append("The first order logic is:").append('\n').append('\n')
-                .append(firstOrder.getKey());
+                .append(firstOrder.getKey()).append("\n\nThe Kripke structure is:\n");
+        String ks = KripkeTransfer.beginTransfer(firstOrder.getValue());
+        sb.append(ks);
         label.setText(sb.toString());
     }
     private void saveFile(){

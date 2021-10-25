@@ -30,7 +30,7 @@ public class App extends Application {
         TextArea textArea = new TextArea();
         textArea.setText("Please input imp program here \nor open a text file that contains a simp program.");
         textArea.setPrefSize(400,800);
-        TextArea label = new TextArea("The result will displayed here");
+        TextArea label = new TextArea("The Text result will displayed here");
         label.setPrefSize(400,800);
         label.editableProperty().set(false);
         root.setLeft(textArea);

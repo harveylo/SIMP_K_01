@@ -5,6 +5,7 @@ import lombok.*;
 import java.util.Objects;
 
 @Data
+@AllArgsConstructor
 public class Variable implements Comparable<Variable> {
     private final String name;
     private final VariableType type;
