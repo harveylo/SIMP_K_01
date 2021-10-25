@@ -58,9 +58,9 @@ public class Imp {
                     String pc = String.format("pc%d", i);
                     String logicNew = v.toString();
                     logicNew = logicNew.replace("pc", pc);
-                    logicString.append(String.format("pc=%s and %s%n", pc, logicNew));
+                    logicString.append(String.format("pc=%s and %s", pc, logicNew)).append('\n');
                 } else {
-                    logicString.append(v.toString());
+                    logicString.append(v.toString()).append('\n');
                 }
             }
         }
