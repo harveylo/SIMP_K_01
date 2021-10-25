@@ -32,7 +32,7 @@ public class KripkeTransfer {
         sb.append("\nStates are:\n");
         int i = 0;
         for(String l : labels){
-            sb.append('S').append(i++).append(":(").append(l).append(')');
+            sb.append('S').append(i++).append(":(").append(l).append(')').append('\n');
         }
         sb.append('\n').append("Relations are:\n");
         i=0;
@@ -76,7 +76,7 @@ public class KripkeTransfer {
             if (oldLabel.length()!=0&&lastArgs.length()!=0){
                 oldLabel.append(',').append(lastArgs);
             }
-            lastLogicsTmpI =next(lgss.get(i),lastLogicsTmpI);
+            lastLogicsTmpI.changeAll(next(lgss.get(i),lastLogicsTmpI));
             tmp.add(i,lastLogicsTmpI.getPostLabel());
             tmp.remove(i+1);
             List<Variable> nVars = lastLogicsTmpI.getVars();

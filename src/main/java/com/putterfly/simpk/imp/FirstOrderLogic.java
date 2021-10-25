@@ -40,6 +40,13 @@ public class FirstOrderLogic {
         opr = f.getOpr();
         vars = f.getVars();
     }
+    public void changeAll(FirstOrderLogic f){
+        preLabel = f.getPreLabel();
+        postLabel = f.getPostLabel();
+        condition = f.getCondition();
+        opr = f.getOpr();
+        vars = f.getVars();
+    }
 
     public String findAssignVariable(String statement) {
         Pattern r = Pattern.compile("(\\w+)\\s*=\\s*");
