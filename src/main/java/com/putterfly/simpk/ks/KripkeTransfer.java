@@ -25,7 +25,9 @@ public class KripkeTransfer {
             else pcs.add("");
             lastLogics.add(new FirstOrderLogic());
         }
-        createKLabels(lgss,pcs,relations,labels,lastLogics,variables,states,nodes,0);
+        createKLabels(lgss,pcs,relations,labels,lastLogics,variables,states,nodes
+//                ,0
+        );
         StringBuilder sb = new StringBuilder();
         sb.append("\nStates are:\n");
         int i = 0;
@@ -50,11 +52,12 @@ public class KripkeTransfer {
                                      List<FirstOrderLogic> lastLogics,
                                      List<Variable> variables,
                                      List<String> states,
-                                     List<KripkeStructure> nodes,
-                                     int deep){
-        deep++;
-        List<String> tmp = pcs;
-        List<FirstOrderLogic> lastLogicsTmp = lastLogics;
+                                     List<KripkeStructure> nodes
+//                                     ,int deep
+    ){
+//        deep++;
+        List<String> tmp = new LinkedList<>(pcs);
+        List<FirstOrderLogic> lastLogicsTmp =  new LinkedList<>(lastLogics);
         for(int i = 0;i<pcs.size();i++){
             KripkeStructure kripkeStructure = new KripkeStructure();
             StringBuilder oldLabel = new StringBuilder();
@@ -99,7 +102,9 @@ public class KripkeTransfer {
             if(relations.contains(r)){
                 tmp.add(i,pcs.get(i));
                 tmp.remove(i+1);
-                lastLogicsTmpI = lastLg;
+                lastLogicsTmp.add(i,lastLg);
+                lastLogicsTmp.remove(i+1);
+//                lastLogicsTmpI = lastLg;
                 continue;
             }
             if (oldLabel.length()!=0&&newLabel.length()!=0){
@@ -111,7 +116,9 @@ public class KripkeTransfer {
             if(!labels.contains(newLabel.toString())&&newLabel.length()!=0){
                 labels.add(newLabel.toString());
             }
-            createKLabels(lgss,tmp,relations,labels,lastLogicsTmp,nVars,states,nodes,deep+1);
+            createKLabels(lgss,tmp,relations,labels,lastLogicsTmp,nVars,states,nodes
+//                    ,deep+1
+            );
             tmp.add(i,pcs.get(i));
             tmp.remove(i+1);
             lastLogicsTmp.add(i,lastLg);
