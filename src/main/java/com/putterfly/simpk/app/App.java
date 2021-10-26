@@ -42,9 +42,8 @@ public class App extends Application {
         sp.pannableProperty().set(true);
         root.setRight(sp);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-        graphicsContext.fillText("Test",110,110);
-        graphicsContext.strokeRect(90,90,90,90);
-        root.setTop(new TopMenu(stage,textArea,label));
+        graphicsContext.fillText("The graph will be displayed here",40,40);
+        root.setTop(new TopMenu(stage,textArea,label,canvas));
         Scene scene = new Scene(root,1400,800);
         stage.setScene(scene);
         stage.show();

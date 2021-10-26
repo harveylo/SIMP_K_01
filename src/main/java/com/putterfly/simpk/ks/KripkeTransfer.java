@@ -12,7 +12,7 @@ import java.util.List;
 public class KripkeTransfer {
 
 
-    public static String beginTransfer(List<List<FirstOrderLogic>> lgss){
+    public static Pair<String,Pair<List<String>,List<Pair<String,String>>>> beginTransfer(List<List<FirstOrderLogic>> lgss){
         List<String> pcs = new LinkedList<>();
         List<Pair<String,String>> relations = new LinkedList<>();
         List<String> labels = new LinkedList<>();
@@ -41,7 +41,7 @@ public class KripkeTransfer {
                 sb.append('R').append(i++).append(":=").append(ks.toString()).append('\n');
             }
         }
-        return sb.toString();
+        return new Pair<>(sb.toString(),new Pair<>(labels,relations));
 
     }
 
