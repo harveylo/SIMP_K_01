@@ -1,4 +1,4 @@
-package com.putterfly.simpk.app.drawer;
+package com.putterfly.simpk.drawer;
 
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;

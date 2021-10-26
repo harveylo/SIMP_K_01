@@ -1,15 +1,13 @@
 package com.putterfly.simpk.app.item;
 
 
-import com.putterfly.simpk.app.drawer.KSDrawer;
+import com.putterfly.simpk.drawer.KSDrawer;
 import com.putterfly.simpk.imp.FirstOrderLogic;
 import com.putterfly.simpk.imp.Imp;
 import com.putterfly.simpk.imp.Statement;
-import com.putterfly.simpk.ks.KripkeStructure;
 import com.putterfly.simpk.ks.KripkeTransfer;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
