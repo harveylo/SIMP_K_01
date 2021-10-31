@@ -22,3 +22,7 @@
 * Please Build this project with maven using "Install".
 * After Building complete, please run instruction "java -jar SIMP_K_01-1.0-SNAPSHOT-jar-with-dependencies.jar" in cmd to start application.
 * There is already a pre-built jar included in this repository, you can just run the instruction above to start the application
+### Execution Examples
+In the *Examples* directory, there are some input and output samples. 
+
+Input samples include raw imp language text files, and output samples include text result and image result and some screenshots taken in runtime.
