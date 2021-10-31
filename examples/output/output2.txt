@@ -1,0 +1,41 @@
+The labelled program is:
+
+A0: a=0;
+A1: b=1;
+A2: if a < b then
+A3:     a=a+1;
+    else
+A4:     b=b+1;
+    endif;
+AE:
+
+
+The first order logic is:
+
+pc=A0 and pc'=A1 and (a=0) and SAME(V\{a})
+pc=A1 and pc'=A2 and (b=1) and SAME(V\{b})
+pc=A2 and pc'=A3 and (a < b) and SAME(V)
+pc=A3 and pc'=AE and (a=a+1) and SAME(V\{a})
+pc=A2 and pc'=A4 and (not a < b) and SAME(V)
+pc=A4 and pc'=AE and (b=b+1) and SAME(V\{b})
+
+
+The Kripke structure is:
+
+States are:
+S0:(A0)
+S1:(A1,a=0)
+S2:(A2,a=0, b=1)
+S3:(A3,a=0, b=1)
+S4:(AE,a=1, b=1)
+
+Relations are:
+R0:=pc=(U) -> (pc'=A0)
+R1:=pc=(A0) -> (pc'=A1)
+R2:=pc=(A1,a=1,b=1,a=u,b=u) -> (pc'=A2,a'=1,b'=1)
+R3:=pc=(A2,a=1,b=1,a=u,b=u) -> (pc'=A3,a'=1,b'=1)
+R4:=pc=(A3,a=1,b=1,a=u,b=u) -> (pc'=AE,a'=1,b'=1)
+R5:=pc=(AE,a=1,b=1) -> (pc'=U)
+R6:=pc=(U) -> (pc'=A0)
+R7:=pc=(A0,a=0,a=u) -> (pc'=A1,a'=0)
+
