@@ -1,5 +1,0 @@
-a=0;
-b=2;
-while a<b do
-    a=a+1;
-endwhile;

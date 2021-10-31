@@ -18,3 +18,7 @@
 * GUI framework : Javafx</br>
 * JDK version : 14</br>
 * Build automation tool : Maven</br> 
+### Build & Run
+* Please Build this project with maven using "Install".
+* After Building complete, please run instruction "java -jar SIMP_K_01-1.0-SNAPSHOT-jar-with-dependencies.jar" in cmd to start application.
+* There is already a pre-built jar included in this repository, you can just run the instruction above to start the application
