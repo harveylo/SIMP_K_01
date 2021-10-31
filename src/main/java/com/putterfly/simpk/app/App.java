@@ -25,7 +25,7 @@ public class App extends Application {
     public void start(Stage stage) {
         stage.setTitle("IMP to Kripke tool @Putterfly");
 //        stage.initStyle(StageStyle.UNIFIED);
-        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/icon.png")));
+//        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/icon.png")));
         BorderPane root = new BorderPane();
         TextArea textArea = new TextArea();
         textArea.setText("Please input imp program here \nor open a text file that contains a simp program.");
